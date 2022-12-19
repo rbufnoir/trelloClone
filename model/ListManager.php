@@ -15,10 +15,10 @@ class ListManager extends Manager {
     }
 
     public function loadLists($boardId) {
-        $myLists = $this->returnQuery("SELECT * FROM board WHERE board_id=$boardId;");
+        $myLists = $this->returnQuery("SELECT * FROM list WHERE board_id=$boardId;");
 
         foreach($myLists as $list) {
-            $l = new CheckList($list['id'], $list['name'], $list['user_id'], $boardId, $list['priority'], $list['position']);
+            $l = new CheckList($list['list_id'], $list['name'], $list['user_id'], $boardId, $list['priority'], $list['position']);
             $this->addList($l);
         }
     }

@@ -18,7 +18,7 @@ class BoardManager extends Manager {
         $myBoards = $this->returnQuery("SELECT * FROM board WHERE user_id=$userId;");
 
         foreach($myBoards as $board) {
-            $b = new Board($board['id'], $board['name'], $userId);
+            $b = new Board($board['board_id'], $board['name'], $userId);
             $this->addBoard($b);
         }
     }
