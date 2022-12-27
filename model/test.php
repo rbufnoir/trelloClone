@@ -7,11 +7,11 @@ require_once 'TaskManager.php';
 
 $userManager = new UserManager();
 $userManager->loadUserByUsername("rbufnoir");
-$username = $userManager->getUser();
-var_dump($username);
+$rbufnoir = $userManager->getUser();
+var_dump($rbufnoir);
 
 $boardManager = new BoardManager();
-$boardManager->loadBoards($username->getId());
+$boardManager->loadBoards($rbufnoir);
 $boards = $boardManager->getBoards();
 var_dump($boards);
 
@@ -28,3 +28,4 @@ foreach($boards as $board) {
         var_dump($tasks);
     }
 }
+

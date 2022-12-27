@@ -22,4 +22,17 @@ class ListManager extends Manager {
             $this->addList($l);
         }
     }
+
+    public function deleteList(CheckList $list) {
+        $req = "DELETE FROM list WHERE id = :id";
+
+        $statement = $this->getDB()->prepare($req);
+        $statement->bindValue(':id', $list->getId(), PDO::PARAM_INT);
+        
+        $result = $statement->execute();
+        $statement->closeCursor();
+
+        if ($result)
+            unset($list);
+    }
 }

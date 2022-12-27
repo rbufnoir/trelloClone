@@ -22,4 +22,17 @@ class TaskManager extends Manager {
             $this->addTasks($t);
         }
     }
+
+    public function deleteTask(Task $task) {
+        $req = "DELETE FROM task WHERE id = :id";
+
+        $statement = $this->getDB()->prepare($req);
+        $statement->bindValue(':id', $task->getId(), PDO::PARAM_INT);
+        
+        $result = $statement->execute();
+        $statement->closeCursor();
+
+        if ($result)
+            unset($game);
+    }
 }
