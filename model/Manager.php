@@ -4,7 +4,7 @@ abstract class Manager {
     private static $pdo;
 
     private static function setDB() {
-        self::$pdo = new PDO("mysql:host=localhost;dbname=trelloclone;charset=utf8", "root", "");
+        self::$pdo = new PDO("mysql:host=localhost;dbname=treffo;charset=utf8", "root", "");
         self::$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);
     }
 

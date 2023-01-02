@@ -19,22 +19,22 @@ ob_start();
                                     <p class="text-center small">Enter your personal details to create account</p>
                                 </div>
 
-                                <form class="row g-3 needs-validation" novalidate>
+                                <form class="row g-3 needs-validation" method="POST" action='<?= URL ?>registerValidation' novalidate>
                                     <div class="col-12">
-                                        <label for="yourName" class="form-label">Username</label>
-                                        <input type="text" name="name" class="form-control" id="yourName" required>
+                                        <label for="yourUsername" class="form-label">Username</label>
+                                        <input type="text" name="yourUsername" class="form-control" id="yourUsername" required>
                                         <div class="invalid-feedback">Please, enter your username!</div>
                                     </div>
 
                                     <div class="col-12">
                                         <label for="yourEmail" class="form-label">Your Email</label>
-                                        <input type="email" name="email" class="form-control" id="yourEmail" required>
+                                        <input type="email" name="yourEmail" class="form-control" id="yourEmail" required>
                                         <div class="invalid-feedback">Please enter a valid Email adddress!</div>
                                     </div>
 
                                     <div class="col-12">
                                         <label for="yourPassword" class="form-label">Password</label>
-                                        <input type="password" name="password" class="form-control" id="yourPassword" required>
+                                        <input type="password" name="yourPassword" class="form-control" id="yourPassword" required>
                                         <div class="invalid-feedback">Please enter your password!</div>
                                     </div>
 
