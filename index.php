@@ -6,8 +6,18 @@ if (empty($_GET['page']))
 else {
     $url = explode("/", filter_var($_GET['page'], FILTER_SANITIZE_URL));
     var_dump($_GET['page']);
-    if ($url[0] == 'profile')
-        require_once 'view/user.profile.html.php';
-    else
+    switch ($url) {
+        case $url[0] == 'profile':
+            require_once 'view/user.profile.html.php';
+            break;
+        case $url[0] == 'register':
+            require_once 'view/register.html.php';
+            break;
+        case $url[0] == 'login':
+            require_once 'view/login.html.php';
+            break;
+        default:
         require_once 'view/error.404.html.php';
+        break;
+    }
 }
