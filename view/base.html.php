@@ -44,10 +44,10 @@
     <script src="assets/js/modal.js"></script>
     <script>
         $(document).ready(function() {
-            $('#example-popover').popover({
+            $('.btn-link').popover({
                 placement: 'right',
                 html: true,
-                content: '<a href="#">Change priority</a><a href="#">Delete</a>'
+                content: '<a href="#">Delete</a>'
             })
         });
 
