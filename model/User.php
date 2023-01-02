@@ -5,12 +5,14 @@ class User {
     private string $username;
     private string $email;
     private string $password;
+    private string $profilePicture;
 
-    public function __construct($id, $username, $email,  $password) {
+    public function __construct($id, $username, $email,  $password, $profilePicture) {
         $this->id = $id;
         $this->username = $username;
         $this->email = $email;
         $this->password = $password;
+        $this->profilePicture = $profilePicture;
     }
 
     /**
@@ -81,6 +83,24 @@ class User {
      */ 
     public function setPassword($password) {
         $this->password = $password;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of profilePicture
+     */ 
+    public function getProfilePicture() {
+        return $this->profilePicture;
+    }
+
+    /**
+     * Set the value of profilePicture
+     *
+     * @return  self
+     */ 
+    public function setProfilePicture($profilePicture) {
+        $this->profilePicture = $profilePicture;
 
         return $this;
     }

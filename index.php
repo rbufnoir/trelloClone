@@ -26,6 +26,12 @@ else {
         case $url[0] == 'login':
             require_once 'view/login.html.php';
             break;
+        case $url[0] == 'checkUserLogin':
+            $userController->checkUserLogin();
+            break;
+        case $url[0] == 'logout':
+            $userController->logoutUser();
+            break;
         case $url[0] == 'contact':
             require_once 'view/contact.html.php';
             break;

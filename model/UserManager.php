@@ -12,7 +12,12 @@ class UserManager extends Manager {
 
     public function loadUserByUsername($username) {
         $req = $this->returnQuery("SELECT * FROM user WHERE username='$username';");
-        $this->user = new User($req[0]['user_id'], $req[0]['username'], $req[0]['email'], $req[0]['password']);
+        $this->user = new User($req[0]['user_id'], $req[0]['username'], $req[0]['email'], $req[0]['password'], $req[0]['profile_picture_url']);
+    }
+    
+    public function getUserByEmail($email) {
+        $req = $this->returnQuery("SELECT * FROM user WHERE email='$email';");
+        $this->user = new User($req[0]['user_id'], $req[0]['username'], $req[0]['email'], $req[0]['password'], $req[0]['profile_picture_url']);
     }
 
     public function newUserDB($username, $email, $password) {
