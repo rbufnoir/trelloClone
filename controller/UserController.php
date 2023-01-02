@@ -18,8 +18,10 @@ class UserController {
 
             if ($this->UserManager->isUserMailAlredyTaken($email))
                 echo "Mail déjà utilisé";
-            else
-                $this->UserManager->newUserDB($username, $email, $password);
+            else {
+                if ($this->UserManager->newUserDB($username, $email, $password))
+                    header('Location:'.URL.'registerComplete');
+            }
         }
     }
 }

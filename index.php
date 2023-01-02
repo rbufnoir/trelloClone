@@ -20,6 +20,9 @@ else {
         case $url[0] == 'registerValidation':
             $userController->newUserValidation();
             break;
+        case $url[0] == 'registerComplete':
+            require_once 'view/registerComplete.html.php';
+            break;
         case $url[0] == 'login':
             require_once 'view/login.html.php';
             break;

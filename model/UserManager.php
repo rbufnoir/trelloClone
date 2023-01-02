@@ -26,8 +26,7 @@ class UserManager extends Manager {
 
         $statement->closeCursor();
 
-        if ($result)
-            echo 'Success!';
+        return $result;
     }
 
     public function isUserMailAlredyTaken($email) {
