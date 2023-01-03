@@ -39,6 +39,8 @@ class UserController
             $user = $this->loadUserByEmail($email);
 
             if (password_verify($password, $user->getPassword())) {
+                if ($_POST['remember'] == "on")
+                    $this->startCookies($user);
                 $this->startSession($user);
                 header('Location:' . URL);
             }
@@ -60,6 +62,16 @@ class UserController
                 $this->startSession($user);
                 header('Location:' . URL . 'profile');
         }
+    }
+
+    public function startCookies($user) {
+        setcookie("treffoEmail", $user->getEmail(), time() + (60 * 60 * 24 * 30), '/');
+        setcookie("treffoPassword", $user->getPassword(), time() + (60 * 60 * 24 * 30), '/');
+    }
+
+    public function deleteCookies() {
+        setcookie("treffoEmail", "", time() - 3600);
+        setcookie("treffoPassword", "", time() - 3600);
     }
 
     private function startSession($user) {

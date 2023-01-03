@@ -13,12 +13,14 @@
                 <i class="bi bi-menu-button-wide"></i><span>Boards</span><i class="bi bi-chevron-down ms-auto"></i>
             </a>
             <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-                <li>
-                    <a href="#">
-                        <i class="bi bi-circle"></i><span>Board 1</span>
-                    </a>
-                </li>
-                <li>
+                <?php foreach($boards as $board): ?>
+                    <li>
+                        <a href="board/<?= $board->getUserId().'/'.$board->getId(); ?>">
+                            <i class="bi bi-circle"></i><span><?= $board->getName(); ?></span>
+                        </a>
+                    </li>
+                <?php endforeach; ?>
+                <!-- <li>
                     <a href="#">
                         <i class="bi bi-circle"></i><span>Board 2</span>
                     </a>
@@ -27,7 +29,7 @@
                     <a href="#">
                         <i class="bi bi-circle"></i><span>Board 3</span>
                     </a>
-                </li>
+                </li> -->
             </ul>
         </li><!-- End Components Nav -->
 

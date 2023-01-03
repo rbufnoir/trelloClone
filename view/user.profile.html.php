@@ -1,6 +1,6 @@
 <?php
 if (empty($_SESSION))
-    header('Location:'.URL);
+    header('Location:'.URL .'register');
 
 ob_start();
 ?>
