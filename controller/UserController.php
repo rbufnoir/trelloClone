@@ -78,6 +78,7 @@ class UserController
         $_SESSION['username'] = $user->getUsername();
         $_SESSION['email'] = $user->getEmail();
         $_SESSION['profilePicture'] = $user->getProfilePicture();
+        $_SESSION['user_id'] = $user->getId();
     }
 
     public function logoutUser() {

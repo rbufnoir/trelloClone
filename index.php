@@ -6,8 +6,8 @@ require_once 'controller/UserController.php';
 require_once 'controller/BoardController.php';
 
 $userController = new UserController();
-$boardManager = new BoardController();
-$boards = (isset($_SESSION['email'])) ? $boardManager->loadBoards($userController->loadUserByEmail($_SESSION['email'])): null;
+$boardController = new BoardController();
+$boards = (isset($_SESSION['email'])) ? $boardController->loadBoards($userController->loadUserByEmail($_SESSION['email'])): null;
 
 if (empty($_GET['page']))
     require_once 'view/board.html.php';
@@ -35,9 +35,8 @@ else {
         case $url[0] == 'checkUserLogin':
             $userController->checkUserLogin();
             break;
-        case $url[0] == 'logout':
         case $url[0] == 'board':
-            //On récupère les listes!
+            $boardController->getList($url[1], $url[2]);
             break;
         case $url[0] == 'logout':
             $userController->logoutUser();
