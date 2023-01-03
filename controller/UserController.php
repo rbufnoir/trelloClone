@@ -49,8 +49,7 @@ class UserController
         $user = $this->loadUserByEmail($_SESSION['email']);
         $username = (!empty($_POST['yourUsername'])) ? htmlspecialchars($_POST['yourUsername']) : $user->getUsername();
         $email = (!empty($_POST['yourEmail'])) ? htmlspecialchars($_POST['yourEmail']) : $user->getEmail();
-        $profilePicture = (!empty($_POST['uploadProfilePicture'])) ? htmlspecialchars($_POST['uploadProfilePicture']) : $user->getProfilePicture();
-        if (isset($_FILES['uploadProfilePicture']))
+        if (isset($_FILES['uploadProfilePicture']) && $_FILES['uploadProfilePicture']['name'] != null)
             $this->UserManager->uploadPicture($_FILES['uploadProfilePicture']);
         
         if ($this->UserManager->isUserMailAlredyTaken($email) && $email != $_SESSION['email'])
