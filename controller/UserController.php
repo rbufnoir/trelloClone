@@ -2,11 +2,17 @@
 
 require_once 'model/UserManager.php';
 
-class UserController {
+class UserController
+{
     private $UserManager;
 
     public function __construct() {
         $this->UserManager = new UserManager();
+    }
+
+    public function loadUserByEmail($email) {
+        $this->UserManager->getUserByEmail($email);
+        return $this->UserManager->getUser();
     }
 
     public function newUserValidation() {
@@ -20,7 +26,7 @@ class UserController {
                 echo "Mail déjà utilisé";
             else {
                 if ($this->UserManager->newUserDB($username, $email, $password))
-                    header('Location:'.URL.'registerComplete');
+                    header('Location:' . URL . 'registerComplete');
             }
         }
     }
@@ -30,13 +36,30 @@ class UserController {
             $email = htmlspecialchars($_POST['yourEmail']);
             $password = htmlspecialchars($_POST['yourPassword']);
 
-            $this->UserManager->getUserByEmail($email);
-            $user = $this->UserManager->getUser();
+            $user = $this->loadUserByEmail($email);
 
             if (password_verify($password, $user->getPassword())) {
                 $this->startSession($user);
-                header('Location:'.URL);
+                header('Location:' . URL);
             }
+        }
+    }
+
+    public function updateUserProfile() {
+        $user = $this->loadUserByEmail($_SESSION['email']);
+        $username = (!empty($_POST['yourUsername'])) ? htmlspecialchars($_POST['yourUsername']) : $user->getUsername();
+        $email = (!empty($_POST['yourEmail'])) ? htmlspecialchars($_POST['yourEmail']) : $user->getEmail();
+        $profilePicture = (!empty($_POST['uploadProfilePicture'])) ? htmlspecialchars($_POST['uploadProfilePicture']) : $user->getProfilePicture();
+        if (isset($_FILES['uploadProfilePicture']))
+            $this->UserManager->uploadPicture($_FILES['uploadProfilePicture']);
+        
+        if ($this->UserManager->isUserMailAlredyTaken($email) && $email != $_SESSION['email'])
+            echo 'Mail déjà utilisé!';
+        else {
+            if ($this->UserManager->updateUserInfoDB($username, $email, $user->getId()))
+                $user = $this->UserManager->getUser();
+                $this->startSession($user);
+                header('Location:' . URL . 'profile');
         }
     }
 
@@ -49,6 +72,6 @@ class UserController {
     public function logoutUser() {
         session_unset();
         session_destroy();
-        header('Location:'.URL);
+        header('Location:' . URL);
     }
 }

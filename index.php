@@ -12,7 +12,10 @@ else {
     $url = explode("/", filter_var($_GET['page'], FILTER_SANITIZE_URL));
     switch ($url) {
         case $url[0] == 'profile':
-            require_once 'view/user.profile.html.php';
+            if (empty($url[1]))
+                require_once 'view/user.profile.html.php';
+            else if ($url[1] == 'update')
+                $userController->updateUserProfile();
             break;
         case $url[0] == 'register':
             require_once 'view/register.html.php';

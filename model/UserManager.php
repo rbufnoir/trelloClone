@@ -28,14 +28,50 @@ class UserManager extends Manager {
         $statement->bindValue(':email', $email, PDO::PARAM_STR);
         $statement->bindValue(':password', $password, PDO::PARAM_STR);
         $result = $statement->execute();
-
+        
         $statement->closeCursor();
-
+        
+        return $result;
+    }
+    
+    public function updateUserInfoDB($username, $email, $id) {
+        $req = "UPDATE user SET username=:username, email=:email WHERE user_id=:id;";
+        
+        $statement = $this->getDB()->prepare($req);
+        $statement->bindValue(':username', $username, PDO::PARAM_STR);
+        $statement->bindValue(':email', $email, PDO::PARAM_STR);
+        $statement->bindValue(':id', $id, PDO::PARAM_INT);
+        $result = $statement->execute();
+        
+        $statement->closeCursor();
+        $this->loadUserByUsername($username);
+        
         return $result;
     }
 
     public function isUserMailAlredyTaken($email) {
         $req = $this->returnQuery("SELECT * FROM user WHERE email='$email';");
         return !empty($req);
+    }
+
+    public function uploadPicture($pic) {
+        if (getimagesize(($pic['tmp_name']))) {
+            $target = "./assets/img/" . basename(htmlspecialchars($this->user->getEmail()));
+            if (move_uploaded_file($pic['tmp_name'], $target)) {
+                $req = "UPDATE user SET profile_picture_url=:profilePicture WHERE user_id=:id;";
+
+                $statement = $this->getDB()->prepare($req);
+                $statement->bindValue(':profilePicture', $this->user->getEmail(), PDO::PARAM_STR);
+                $statement->bindValue(':id', $this->user->getId(), PDO::PARAM_INT);
+
+                $result = $statement->execute();
+        
+                $statement->closeCursor();
+                $this->loadUserByUsername($this->user->getUsername());
+
+                return $result;
+            }
+
+        }
     }
 }

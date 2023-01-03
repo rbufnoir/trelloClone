@@ -65,29 +65,30 @@ ob_start();
                             <div class="tab-pane fade profile-edit pt-3" id="profile-edit">
 
                                 <!-- Profile Edit Form -->
-                                <form>
+                                <form method="POST" action="profile/update" enctype="multipart/form-data">
                                     <div class="row mb-3">
                                         <label for="profileImage" class="col-md-4 col-lg-3 col-form-label">Profile Image</label>
                                         <div class="col-md-8 col-lg-9">
                                             <img src="assets/img/<?= $_SESSION['profilePicture'] ?>" alt="Profile">
                                             <div class="pt-2">
-                                                <a href="#" class="btn btn-primary btn-sm" title="Upload new profile image"><i class="bi bi-upload"></i></a>
-                                                <a href="#" class="btn btn-danger btn-sm" title="Remove my profile image"><i class="bi bi-trash"></i></a>
+                                                <label for="uploadProfilePicture" class="btn btn-primary btn-sm" title="Upload new profile image"><i class="bi bi-upload"></i></label>
+                                                <a id="deleteProfilePicture" href="#" class="btn btn-danger btn-sm" title="Remove my profile image"><i class="bi bi-trash"></i></a>
+                                                <input id="uploadProfilePicture" name="uploadProfilePicture" class="d-none" type="file" accept="image/png, image/jpeg">
                                             </div>
                                         </div>
                                     </div>
 
                                     <div class="row mb-3">
-                                        <label for="fullName" class="col-md-4 col-lg-3 col-form-label">Full Name</label>
+                                        <label for="yourUsername" class="col-md-4 col-lg-3 col-form-label">Full Name</label>
                                         <div class="col-md-8 col-lg-9">
-                                            <input name="fullName" type="text" class="form-control" id="fullName" value="<?= $_SESSION['username'] ?>">
+                                            <input name="yourUsername" type="text" class="form-control" id="yourUsername" value="<?= $_SESSION['username'] ?>">
                                         </div>
                                     </div>
 
                                     <div class="row mb-3">
-                                        <label for="Email" class="col-md-4 col-lg-3 col-form-label">Email</label>
+                                        <label for="yourEmail" class="col-md-4 col-lg-3 col-form-label">Email</label>
                                         <div class="col-md-8 col-lg-9">
-                                            <input name="email" type="email" class="form-control" id="Email" value="<?= $_SESSION['email'] ?>">
+                                            <input name="yourEmail" type="email" class="form-control" id="yourEmail" value="<?= $_SESSION['email'] ?>">
                                         </div>
                                     </div>
 
