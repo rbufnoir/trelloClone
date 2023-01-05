@@ -23,7 +23,7 @@ ob_start();
                         <?php $tasks = $boardController->getTasks($list);
                         if ($tasks != null)
                             foreach ($tasks as $task) : ?>
-                            <a href="#" class="list-group-item list-group-item-action card-body rounded bg-white shadow-2 mb-2 py-3">
+                            <a id="task_<?= $task->getId(); ?>" href="#" class="list-group-item list-group-item-action card-body rounded bg-white shadow-2 mb-2 py-3" onclick="test(this)">
                                 <?= $task->getName(); ?>
                             </a>
                         <?php endforeach; ?>

@@ -47,6 +47,12 @@ class TaskManager extends Manager {
         $statement->bindValue(':board_id', $board_id, PDO::PARAM_INT);
 
         $result = $statement->execute();
+
         $statement->closeCursor();
+    }
+
+    public function getLastInsertedId() {
+        $req = ($this->returnQuery("SELECT LAST_INSERT_ID();"));
+        return ($req[0]['LAST_INSERT_ID()']);
     }
 }

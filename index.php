@@ -11,6 +11,8 @@ $boards = (isset($_SESSION['email'])) ? $boardController->loadBoards($userContro
 
 if(isset($_GET['user']) && isset($_GET['board']) && isset($_GET['list']) && isset($_GET['task'])) {
     $boardController->addTask($_GET['user'], $_GET['board'], $_GET['list'], $_GET['task']);
+    echo ($boardController->getLastInsertedId());
+    return ;
 }
 
 if (empty($_GET['page']))

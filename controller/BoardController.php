@@ -35,4 +35,9 @@ class BoardController {
     public function addTask($userId, $boardId, $listId, $taskName) {
         $this->TaskManager->insertTask($userId, $boardId, $listId, $taskName);
     }
+
+    public function getLastInsertedId() {
+        $req = $this->TaskManager->getLastInsertedId();
+        return $req;
+    }
 }
