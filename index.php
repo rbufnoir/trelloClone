@@ -36,7 +36,8 @@ else {
             $userController->checkUserLogin();
             break;
         case $url[0] == 'board':
-            $boardController->getList($url[1], $url[2]);
+            $lists = $boardController->getList($url[1], $url[2]);
+            require_once 'view/board.html.php';
             break;
         case $url[0] == 'logout':
             $userController->logoutUser();

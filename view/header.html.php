@@ -1,7 +1,7 @@
 <header id="header" class="header fixed-top d-flex align-items-center">
 	<div class="d-flex align-items-center justify-content-between">
 		<a href="<?= URL ?>" class="logo d-flex align-items-center">
-			<img src="assets/img/icon.png" alt="">
+			<img src="<?= URL ?>assets/img/icon.png" alt="">
 			<span class="d-none d-lg-block">Treffo</span>
 		</a>
 		<i class="bi bi-list toggle-sidebar-btn"></i>
@@ -17,7 +17,7 @@
 				?>
 
 					<a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-						<img src="assets/img/<?= $_SESSION['profilePicture'] ?>" alt="Profile" class="rounded-circle">
+						<img src="<?= URL ?>assets/img/<?= $_SESSION['profilePicture']; ?>" alt="Profile" class="rounded-circle">
 						<span class="d-none d-md-block dropdown-toggle ps-2"><?= ucfirst($_SESSION['username']) ?></span>
 					</a>
 
@@ -68,7 +68,7 @@
 					</ul>
 				<?php else : ?>
 					<a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-						<img src="assets/img/defaultUserPicture.png" alt="Profile" class="rounded-circle">
+						<img src="<?= URL ?>assets/img/defaultUserPicture.png" alt="Profile" class="rounded-circle">
 						<span class="d-none d-md-block dropdown-toggle ps-2"></span>
 					</a>
 

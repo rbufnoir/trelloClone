@@ -15,7 +15,7 @@
             <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                 <?php foreach($boards as $board): ?>
                     <li>
-                        <a href="board/<?= $board->getUserId().'/'.$board->getId(); ?>">
+                        <a href="<?= URL ?>board/<?= $board->getUserId().'/'.$board->getId(); ?>">
                             <i class="bi bi-circle"></i><span><?= $board->getName(); ?></span>
                         </a>
                     </li>

@@ -19,4 +19,16 @@ class BoardController {
         $this->BoardManager->loadBoards($user);
         return $this->BoardManager->getBoards();
     }
+
+    public function getList($userId, $board) {
+        if ($userId == $_SESSION['user_id']) {
+            $this->ListManager->loadLists($board);
+            return $this->ListManager->getLists();
+        }
+    }
+
+    public function getTasks($list) {
+        $this->TaskManager->loadTasks($list->getId());
+        return $this->TaskManager->getTasks();
+    }
 }
