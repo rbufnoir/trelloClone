@@ -9,6 +9,10 @@ $userController = new UserController();
 $boardController = new BoardController();
 $boards = (isset($_SESSION['email'])) ? $boardController->loadBoards($userController->loadUserByEmail($_SESSION['email'])): null;
 
+if(isset($_GET['user']) && isset($_GET['board']) && isset($_GET['list']) && isset($_GET['task'])) {
+    $boardController->addTask($_GET['user'], $_GET['board'], $_GET['list'], $_GET['task']);
+}
+
 if (empty($_GET['page']))
     require_once 'view/board.html.php';
 else {

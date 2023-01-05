@@ -15,6 +15,7 @@ class TaskManager extends Manager {
     }
 
     public function loadTasks($listId) {
+        $this->tasks = null;
         $myTasks = $this->returnQuery("SELECT * FROM task WHERE list_id=$listId;");
 
         foreach($myTasks as $task) {
@@ -31,8 +32,21 @@ class TaskManager extends Manager {
         
         $result = $statement->execute();
         $statement->closeCursor();
-
+        
         if ($result)
             unset($game);
+    }
+    
+    public function insertTask($user_id, $board_id, $list_id, $taskName) {
+        $req = "INSERT INTO task (name, list_id, user_id, board_id) VALUES (:name, :list_id, :user_id, :board_id);";
+        
+        $statement = $this->getDB()->prepare($req);
+        $statement->bindValue(':name', $taskName, PDO::PARAM_STR);
+        $statement->bindValue(':list_id', $list_id, PDO::PARAM_INT);
+        $statement->bindValue(':user_id', $user_id, PDO::PARAM_INT);
+        $statement->bindValue(':board_id', $board_id, PDO::PARAM_INT);
+
+        $result = $statement->execute();
+        $statement->closeCursor();
     }
 }

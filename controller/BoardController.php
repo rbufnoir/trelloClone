@@ -31,4 +31,8 @@ class BoardController {
         $this->TaskManager->loadTasks($list->getId());
         return $this->TaskManager->getTasks();
     }
+
+    public function addTask($userId, $boardId, $listId, $taskName) {
+        $this->TaskManager->insertTask($userId, $boardId, $listId, $taskName);
+    }
 }
