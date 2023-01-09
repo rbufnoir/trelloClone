@@ -13,6 +13,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button id="deleteTask" type="button" class="d-none btn btn-danger">Delete</button>
                 <button id="sendData" type="button" class="btn btn-primary">Add</button>
             </div>
         </div>

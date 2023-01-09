@@ -9,9 +9,16 @@ $userController = new UserController();
 $boardController = new BoardController();
 $boards = (isset($_SESSION['email'])) ? $boardController->loadBoards($userController->loadUserByEmail($_SESSION['email'])): null;
 
-if(isset($_GET['user']) && isset($_GET['board']) && isset($_GET['list']) && isset($_GET['task'])) {
-    $boardController->addTask($_GET['user'], $_GET['board'], $_GET['list'], $_GET['task']);
-    echo ($boardController->getLastInsertedId());
+if(isset($_GET['type']) && isset($_GET['info']) && isset($_GET['data'])) {
+    if ($_GET['data'] == 'delete')
+        ;
+    else if ($_GET['type'] == 'task') {
+        $boardController->addTask($_SESSION['user_id'], $_GET['board'], $_GET['list'], $_GET['task']);
+        echo ($boardController->getLastInsertedId());
+    }
+    else if ($_GET['type'] == 'list') {
+
+    }
     return ;
 }
 
