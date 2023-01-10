@@ -35,4 +35,17 @@ class ListManager extends Manager {
         if ($result)
             unset($list);
     }
+
+    public function insertList($user_id, $board_id, $listName) {
+        $req = "INSERT INTO list (name, user_id, board_id) VALUES (:name, :user_id, :board_id);";
+        
+        $statement = $this->getDB()->prepare($req);
+        $statement->bindValue(':name', $listName, PDO::PARAM_STR);
+        $statement->bindValue(':user_id', $user_id, PDO::PARAM_INT);
+        $statement->bindValue(':board_id', $board_id, PDO::PARAM_INT);
+
+        $result = $statement->execute();
+
+        $statement->closeCursor();
+    }
 }

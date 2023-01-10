@@ -29,7 +29,7 @@ ob_start();
                         <?php endforeach; ?>
                     </div>
                     <div class="card-footer border-0 pt-0">
-                        <button type="button" class="btn btn-link btn-block text-reset">
+                        <button id="addCard" type="button" class="btn btn-link btn-block text-reset">
                             <i class="fas fa-plus mr-2"></i> Add another card
                         </button>
                     </div>

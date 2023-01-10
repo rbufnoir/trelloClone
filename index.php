@@ -9,17 +9,26 @@ $userController = new UserController();
 $boardController = new BoardController();
 $boards = (isset($_SESSION['email'])) ? $boardController->loadBoards($userController->loadUserByEmail($_SESSION['email'])): null;
 
-if(isset($_GET['type']) && isset($_GET['info']) && isset($_GET['data'])) {
-    if ($_GET['data'] == 'delete')
-        ;
-    else if ($_GET['type'] == 'task') {
-        $boardController->addTask($_SESSION['user_id'], $_GET['board'], $_GET['list'], $_GET['task']);
-        echo ($boardController->getLastInsertedId());
-    }
-    else if ($_GET['type'] == 'list') {
+if (isset($_GET['type'])) {
 
+    switch ($_GET['type']) {
+        case 'addList':
+            $boardController->addList($_SESSION['user_id'], $_GET['board'], $_GET['data']);
+            echo $boardController->getLastInsertedId();
+            break;
+        case 'addCard':
+            $boardController->addTask($_SESSION['user_id'], $_GET['board'], $_GET['list'], $_GET['data']);
+            echo $boardController->getLastInsertedId();
+            break;
+        case 'task':
+            if ($_GET['data'] === "delete")
+                $boardController->deleteTask($_GET['task']);
+            else
+                $boardController->updateTask($_GET['task'], $_GET['data']);
+            break;
     }
-    return ;
+
+    return;
 }
 
 if (empty($_GET['page']))

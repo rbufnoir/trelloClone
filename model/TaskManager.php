@@ -25,18 +25,36 @@ class TaskManager extends Manager {
     }
 
     public function deleteTask(Task $task) {
-        $req = "DELETE FROM task WHERE id = :id";
+        $req = "DELETE FROM task WHERE task_id = :id";
 
         $statement = $this->getDB()->prepare($req);
         $statement->bindValue(':id', $task->getId(), PDO::PARAM_INT);
         
-        $result = $statement->execute();
+        $statement->execute();
         $statement->closeCursor();
-        
-        if ($result)
-            unset($game);
     }
-    
+
+    public function deleteTaskById($task_id) {
+        $req = "DELETE FROM task WHERE task_id=:id";
+
+        $statement = $this->getDB()->prepare($req);
+        $statement->bindValue(':id', $task_id, PDO::PARAM_INT);
+        
+        $statement->execute();
+        $statement->closeCursor();
+    }
+
+    public function updateTask($task_id, $task_name) {
+        $req = "UPDATE task SET name=:name WHERE task_id=:id;";
+
+        $statement = $this->getDB()->prepare($req);
+        $statement->bindValue(':id', $task_id, PDO::PARAM_INT);
+        $statement->bindValue(':name', $task_name, PDO::PARAM_STR);
+        
+        $statement->execute();
+        $statement->closeCursor();
+    }
+
     public function insertTask($user_id, $board_id, $list_id, $taskName) {
         $req = "INSERT INTO task (name, list_id, user_id, board_id) VALUES (:name, :list_id, :user_id, :board_id);";
         
