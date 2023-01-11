@@ -21,9 +21,9 @@
                     displayModal(bModal, 'Modify your task', elemClicked);
                     break;
                 case 'BUTTON':
-                    if (elemClicked.target_id == 'addList')
+                    if (elemClicked.target_type == 'addList')
                         displayModal(bModal, 'Add a list', elemClicked);
-                    else
+                    else if (elemClicked.target_type == 'addCard')
                         displayModal(bModal, 'Add a card', elemClicked);
                     break;
             }
@@ -117,6 +117,10 @@
         
         let lists = document.getElementById('lists');
         lists.insertBefore(newList, lists.lastChild);
+    }
+
+    function test(a) {
+        console.log(a);
     }
 })();
 

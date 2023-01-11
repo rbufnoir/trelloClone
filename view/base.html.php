@@ -43,14 +43,8 @@
     <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>
     <script src="<?=URL ?>assets/js/main.js"></script>
     <script src="<?=URL ?>assets/js/modal.js"></script>
+    <script src="<?=URL ?>assets/js/popover.js"></script>
     <script>
-        $(document).ready(function() {
-            $('.list-popover').popover({
-                placement: 'right',
-                html: true,
-                content: '<a href="#">Delete</a>'
-            })
-        });
 
         $('.list-group').sortable({
             forcePlaceholderSize: true,

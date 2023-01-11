@@ -8,14 +8,15 @@ ob_start();
     <section id="board_<?= $url[2] ?>" class="d-flex align-items-start h-100" style="position: relative">
         <div id="lists" class="d-flex align-items-start">
 
-            <?php 
-                if ($lists != null)
-                    foreach ($lists as $list) : ?>
+            <?php
+            if ($lists != null)
+                foreach ($lists as $list) : ?>
                 <div id="<?= 'list_' . $list->getId(); ?>" class="card shadow-1-strong m-3 p-2 pb-0 list">
                     <div class="card-header d-flex justify-content-between pl-1 pr-0 mb-3 border-0">
                         <p class="mb-0"><strong><?= $list->getName(); ?></strong></p>
                         <button type="button" class="btn btn-link text-reset m-0 py-0 px-2">
                             <i class="list-popover fas fa-ellipsis-h" data-bs-toggle="popover"></i>
+                            <div id="popover-content" class="visually-hidden">Delete</div>
                         </button>
                     </div>
 
