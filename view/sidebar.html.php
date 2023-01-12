@@ -2,7 +2,7 @@
     <ul class="sidebar-nav" id="sidebar-nav">
 
         <li class="nav-item">
-            <a class="nav-link " href="index.html">
+            <a class="nav-link " href="#">
                 <i class="bi bi-grid"></i>
                 <span>Dashboard</span>
             </a>
@@ -20,16 +20,9 @@
                         </a>
                     </li>
                 <?php endforeach; ?>
-                <!-- <li>
-                    <a href="#">
-                        <i class="bi bi-circle"></i><span>Board 2</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <i class="bi bi-circle"></i><span>Board 3</span>
-                    </a>
-                </li> -->
+                    <li>
+                        <a href="<?= URL ?>createBoard"><i class="bi bi-circle"></i><span>Add a new Board</span> <i class="fas fa-plus mr-4"></i></a>
+                    </li>
             </ul>
         </li><!-- End Components Nav -->
 

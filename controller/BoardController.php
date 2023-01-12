@@ -27,6 +27,13 @@ class BoardController {
         }
     }
 
+    public function createBoard() {
+        if ($_POST['board'] != null) {
+            $this->BoardManager->insertBoard($_SESSION['user_id'], htmlspecialchars($_POST['board']));
+            header('Location:'.URL.'board/1/1');
+        }
+    }
+
     public function getTasks($list) {
         $this->TaskManager->loadTasks($list->getId());
         return $this->TaskManager->getTasks();

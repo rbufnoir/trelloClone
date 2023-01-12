@@ -66,6 +66,12 @@ else {
             $lists = $boardController->getList($url[1], $url[2]);
             require_once 'view/board.html.php';
             break;
+        case $url[0] == 'createBoard':
+            require_once 'view/createBoard.html.php';
+            break;
+        case $url[0] == 'addBoard':
+            $boardController->createBoard();
+            break;
         case $url[0] == 'logout':
             $userController->logoutUser();
             break;

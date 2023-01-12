@@ -42,4 +42,25 @@ class BoardManager extends Manager {
         if ($result)
             unset($board);
     }
+
+    public function deleteBoardById($board_id) {
+        $req = "DELETE FROM board WHERE board_id = :id";
+
+        $statement = $this->getDB()->prepare($req);
+        $statement->bindValue(':id', $board_id, PDO::PARAM_INT);
+        
+        $statement->execute();
+        $statement->closeCursor();
+    }
+
+    public function insertBoard($user_id, $boardName) {
+        $req = "INSERT INTO board (name, user_id) VALUES (:name, :user_id);";
+        
+        $statement = $this->getDB()->prepare($req);
+        $statement->bindValue(':user_id', $user_id, PDO::PARAM_INT);
+        $statement->bindValue(':name', $boardName, PDO::PARAM_STR);
+
+        $statement->execute();
+        $statement->closeCursor();
+    }
 }
