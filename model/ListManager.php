@@ -24,7 +24,7 @@ class ListManager extends Manager {
     }
 
     public function deleteList(CheckList $list) {
-        $req = "DELETE FROM list WHERE id = :id";
+        $req = "DELETE FROM list WHERE list_id = :id";
 
         $statement = $this->getDB()->prepare($req);
         $statement->bindValue(':id', $list->getId(), PDO::PARAM_INT);
@@ -34,6 +34,27 @@ class ListManager extends Manager {
 
         if ($result)
             unset($list);
+    }
+
+    public function deleteListById($list_id) {
+        $req = "DELETE FROM list WHERE list_id = :id";
+
+        $statement = $this->getDB()->prepare($req);
+        $statement->bindValue(':id', $list_id, PDO::PARAM_INT);
+        
+        $statement->execute();
+        $statement->closeCursor();
+    }
+
+    public function updateList($list_id, $list_name) {
+        $req = "UPDATE list SET name=:name WHERE list_id=:id;";
+
+        $statement = $this->getDB()->prepare($req);
+        $statement->bindValue(':id', $list_id, PDO::PARAM_INT);
+        $statement->bindValue(':name', $list_name, PDO::PARAM_STR);
+        
+        $statement->execute();
+        $statement->closeCursor();
     }
 
     public function insertList($user_id, $board_id, $listName) {

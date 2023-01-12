@@ -13,11 +13,7 @@ ob_start();
                 foreach ($lists as $list) : ?>
                 <div id="<?= 'list_' . $list->getId(); ?>" class="card shadow-1-strong m-3 p-2 pb-0 list">
                     <div class="card-header d-flex justify-content-between pl-1 pr-0 mb-3 border-0">
-                        <p class="mb-0"><strong><?= $list->getName(); ?></strong></p>
-                        <button type="button" class="btn btn-link text-reset m-0 py-0 px-2">
-                            <i class="list-popover fas fa-ellipsis-h" data-bs-toggle="popover"></i>
-                            <div id="popover-content" class="visually-hidden">Delete</div>
-                        </button>
+                        <a id="<?= 'updateList_' . $list->getId(); ?>" class="mb-0"><?= $list->getName(); ?></a>
                     </div>
 
                     <div class="list-group list-group-flush">

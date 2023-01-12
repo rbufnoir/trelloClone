@@ -18,12 +18,17 @@
             };
             switch (elemClicked.target.nodeName) {
                 case 'A':
-                    displayModal(bModal, 'Modify your task', elemClicked);
+                    if (elemClicked.target_type == 'l')
+                        displayModal(bModal, 'Modify your list', elemClicked);
+                    else
+                        displayModal(bModal, 'Modify your task', elemClicked);
                     break;
                 case 'BUTTON':
                     if (elemClicked.target_type == 'addList')
                         displayModal(bModal, 'Add a list', elemClicked);
                     else if (elemClicked.target_type == 'addCard')
+                        displayModal(bModal, 'Add a card', elemClicked);
+                    else if (elemClicked.target_type == 'updatedL')    
                         displayModal(bModal, 'Add a card', elemClicked);
                     break;
             }
@@ -77,6 +82,12 @@
                     else
                         document.getElementById('task_' + info.target_id).innerText = data;
                 }
+                else if (info.target_type == 'updateList') {
+                    if (data == 'delete')
+                        document.getElementById('list_'+info.target_id).remove();
+                    else 
+                        document.getElementById('updateList_'+info.target_id).innerText = data;
+                }
                 bModal.hide();
             }
         };
@@ -88,11 +99,11 @@
     function createCard(parentId, id, name) {
         console.log(parentId, id);
         let newCard = document.createElement('a');
-        newCard.setAttribute('id', 'task_'+id);
+        newCard.setAttribute('id', 'task_' + id);
         newCard.setAttribute('class', 'list-group-item list-group-item-action card-body rounded bg-white shadow-2 mb-2 py-3');
         newCard.innerHTML = name;
 
-        document.getElementById('list_'+parentId).children[1].appendChild(newCard);
+        document.getElementById('list_' + parentId).children[1].appendChild(newCard);
     }
 
     function createList(id, name) {
@@ -101,7 +112,7 @@
         newList.setAttribute('class', 'card shadow-1-strong m-3 p-2 pb-0 list');
         newList.innerHTML =
             `<div class="card-header d-flex justify-content-between pl-1 pr-0 mb-3 border-0">
-                <p class="mb-0"><strong>${name}</strong></p>
+                <a id="updateList${id}" class="mb-0">${name}</p>
                 <button type="button" class="btn btn-link text-reset m-0 py-0 px-2">
                     <i class="list-popover fas fa-ellipsis-h" data-bs-toggle="popover"></i>
                 </button>
@@ -114,13 +125,9 @@
                     <i class="fas fa-plus mr-2"></i> Add another card
                 </button>
             </div>`;
-        
+
         let lists = document.getElementById('lists');
         lists.insertBefore(newList, lists.lastChild);
-    }
-
-    function test(a) {
-        console.log(a);
     }
 })();
 

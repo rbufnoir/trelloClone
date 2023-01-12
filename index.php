@@ -7,7 +7,7 @@ require_once 'controller/BoardController.php';
 
 $userController = new UserController();
 $boardController = new BoardController();
-$boards = (isset($_SESSION['email'])) ? $boardController->loadBoards($userController->loadUserByEmail($_SESSION['email'])): null;
+$boards = (isset($_SESSION['email'])) ? $boardController->loadBoards($userController->loadUserByEmail($_SESSION['email'])) : null;
 
 if (isset($_GET['type'])) {
 
@@ -26,6 +26,11 @@ if (isset($_GET['type'])) {
             else
                 $boardController->updateTask($_GET['task'], $_GET['data']);
             break;
+        case 'updateList':
+            if ($_GET['data'] === "delete")
+                $boardController->deleteList($_GET['list']);
+            else
+                $boardController->updateList($_GET['list'], $_GET['data']);
     }
 
     return;

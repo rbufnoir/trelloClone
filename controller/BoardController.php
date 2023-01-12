@@ -48,6 +48,14 @@ class BoardController {
         $this->ListManager->insertList($userId, $boardId, $listName);
     }
 
+    public function deleteList($listId) {
+        $this->ListManager->deleteListById($listId);
+    }
+
+    public function updateList($listId, $listName) {
+        $this->ListManager->updateList($listId, $listName);
+    }
+
     public function getLastInsertedId() {
         $req = $this->TaskManager->getLastInsertedId();
         return $req;
