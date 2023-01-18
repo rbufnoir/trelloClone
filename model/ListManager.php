@@ -15,7 +15,7 @@ class ListManager extends Manager {
     }
 
     public function loadLists($boardId) {
-        $myLists = $this->returnQuery("SELECT * FROM list WHERE board_id=$boardId;");
+        $myLists = $this->returnQuery("SELECT * FROM list WHERE board_id=$boardId ORDER BY position;");
 
         foreach($myLists as $list) {
             $l = new CheckList($list['list_id'], $list['name'], $list['user_id'], $boardId, $list['priority'], $list['position']);
@@ -67,6 +67,17 @@ class ListManager extends Manager {
 
         $result = $statement->execute();
 
+        $statement->closeCursor();
+    }
+
+    public function updatePosition($list_id, $position) {
+        $req = "UPDATE list SET position=:pos WHERE list_id=:list_id;";
+
+        $statement = $this->getDB()->prepare($req);
+        $statement->bindValue(':pos', $position, PDO::PARAM_INT);
+        $statement->bindValue(':list_id', $list_id, PDO::PARAM_INT);
+
+        $statement->execute();
         $statement->closeCursor();
     }
 }

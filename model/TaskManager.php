@@ -16,7 +16,7 @@ class TaskManager extends Manager {
 
     public function loadTasks($listId) {
         $this->tasks = null;
-        $myTasks = $this->returnQuery("SELECT * FROM task WHERE list_id=$listId;");
+        $myTasks = $this->returnQuery("SELECT * FROM task WHERE list_id=$listId ORDER BY position;");
 
         foreach($myTasks as $task) {
             $t = new Task($task['task_id'], $task['name'], $listId, $task['user_id'], $task['board_id'], $task['position'], $task['priority']);
@@ -72,5 +72,17 @@ class TaskManager extends Manager {
     public function getLastInsertedId() {
         $req = ($this->returnQuery("SELECT LAST_INSERT_ID();"));
         return ($req[0]['LAST_INSERT_ID()']);
+    }
+
+    public function updatePosition($task_id, $list_id, $position) {
+        $req = "UPDATE task SET position=:pos, list_id=:list_id WHERE task_id=:task_id;";
+
+        $statement = $this->getDB()->prepare($req);
+        $statement->bindValue(':pos', $position, PDO::PARAM_INT);
+        $statement->bindValue(':list_id', $list_id, PDO::PARAM_INT);
+        $statement->bindValue(':task_id', $task_id, PDO::PARAM_INT);
+
+        $statement->execute();
+        $statement->closeCursor();
     }
 }

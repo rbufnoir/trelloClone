@@ -9,6 +9,11 @@ $userController = new UserController();
 $boardController = new BoardController();
 $boards = (isset($_SESSION['email'])) ? $boardController->loadBoards($userController->loadUserByEmail($_SESSION['email'])) : null;
 
+if (empty($_GET['task']) && isset($_GET['list']) && isset($_GET['pos']))
+    $boardController->updateListPos($_GET['list'], $_GET['pos']);
+else if (isset($_GET['task']) && isset($_GET['list']) && isset($_GET['pos']))
+    $boardController->updateTaskPos($_GET['task'], $_GET['list'], $_GET['pos']);
+
 if (isset($_GET['type'])) {
 
     switch ($_GET['type']) {

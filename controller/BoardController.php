@@ -67,4 +67,14 @@ class BoardController {
         $req = $this->TaskManager->getLastInsertedId();
         return $req;
     }
+
+    public function updateTaskPos($taskId, $listId, $pos) {
+        $req = $this->TaskManager->updatePosition($taskId, $listId, $pos);
+        return $req;
+    }
+
+    public function updateListPos($listId, $pos) {
+        $req = $this->ListManager->updatePosition($listId, $pos);
+        return $req;
+    }
 }

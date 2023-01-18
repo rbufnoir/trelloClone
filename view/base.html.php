@@ -19,10 +19,10 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
     <!-- Custom styles -->
-    <link rel="stylesheet" href="<?=URL ?>assets/css/style.css" />
+    <link rel="stylesheet" href="<?= URL ?>assets/css/style.css" />
 
     <!-- Icon -->
-    <link rel="icon" href="<?=URL ?>assets/img/icon.png">
+    <link rel="icon" href="<?= URL ?>assets/img/icon.png">
 
     <title>Treffo</title>
 </head>
@@ -41,41 +41,9 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.2.min.js"></script>
     <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>
-    <script src="<?=URL ?>assets/js/main.js"></script>
-    <script src="<?=URL ?>assets/js/modal.js"></script>
-    <script>
-
-        $('.list-group').sortable({
-            forcePlaceholderSize: true,
-            connectWith: '.list-group',
-            revert: "true"
-        });
-
-        $('#lists').sortable({
-            forcePlaceholderSize: true,
-            tolerance: "pointer"
-        });
-
-        $('.list-group').on("sortreceive", function(event, ui) {
-            $(this.children).each(() => {
-                console.log(this.innerText);
-            });
-        });
-
-        $('.list-group').on("sortstop", function(event, ui) {
-            if (ui.sender === null)
-                $(this.children).each(() => {
-                    console.log(this.innerText);
-                });
-        });
-
-        $('#lists').on('sortstop', function(event, ui) {
-            $(this).children().each((e) => {
-                console.log(this[e]);
-            });
-        });
-
-    </script>
+    <script src="<?= URL ?>assets/js/main.js"></script>
+    <script src="<?= URL ?>assets/js/modal.js"></script>
+    <script src="<?= URL ?>assets/js/dragDrop.js"></script>
 </body>
 
 </html>
