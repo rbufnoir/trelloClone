@@ -22,7 +22,6 @@ $('#lists').sortable({
     stop: function (event, ui) {
         let listId = (ui.item.attr('id').split('_')[1]);
         let pos = (ui.item.index());
-        console.log(listId, pos);
 
         $.get(`<?= URL ?>index.php?list=${listId}&pos=${pos}`, function(data){
                 data;

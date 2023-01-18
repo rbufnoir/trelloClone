@@ -68,7 +68,6 @@
     }
 
     function sendData(info, data) {
-        console.log(info.target_type, info.board_id, info.parent_id, info.target_id, data);
         let xmlhttp = new XMLHttpRequest();
         xmlhttp.onreadystatechange = function () {
             if (this.readyState == 4 && this.status == 200) {
@@ -97,7 +96,6 @@
     }
 
     function createCard(parentId, id, name) {
-        console.log(parentId, id);
         let newCard = document.createElement('a');
         newCard.setAttribute('id', 'task_' + id);
         newCard.setAttribute('class', 'list-group-item list-group-item-action card-body rounded bg-white shadow-2 mb-2 py-3');

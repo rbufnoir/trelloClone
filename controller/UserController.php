@@ -16,7 +16,6 @@ class UserController
     }
 
     public function newUserValidation() {
-        var_dump($_POST);
         if ($_POST['yourUsername'] != null && $_POST['yourEmail'] != null && $_POST['yourPassword'] != null) {
             $username = htmlspecialchars($_POST['yourUsername']);
             $email = htmlspecialchars($_POST['yourEmail']);
