@@ -42,7 +42,7 @@ if (isset($_GET['type'])) {
 }
 
 if (empty($_GET['page']))
-    require_once 'view/board.html.php';
+    require_once 'view/home.html.php';
 else {
     $url = explode("/", filter_var($_GET['page'], FILTER_SANITIZE_URL));
     switch ($url) {
@@ -68,8 +68,16 @@ else {
             $userController->checkUserLogin();
             break;
         case $url[0] == 'board':
-            $lists = $boardController->getList($url[1], $url[2]);
-            require_once 'view/board.html.php';
+            if ($url[1] == 'edit')
+                $boardController->editBoard($url[2]);
+            else if ($url[1] == 'delete')
+                $boardController->deleteBoard($url[2]);
+            else if ($url[1] == 'editValid')
+                $boardController->editBoardValidation();
+            else {
+                $lists = $boardController->getList($url[1], $url[2]);
+                require_once 'view/board.html.php';
+            }
             break;
         case $url[0] == 'createBoard':
             require_once 'view/createBoard.html.php';

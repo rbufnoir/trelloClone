@@ -15,12 +15,26 @@ class ListManager extends Manager {
     }
 
     public function loadLists($boardId) {
+        $this->lists = null;
         $myLists = $this->returnQuery("SELECT * FROM list WHERE board_id=$boardId ORDER BY position;");
 
         foreach($myLists as $list) {
             $l = new CheckList($list['list_id'], $list['name'], $list['user_id'], $boardId, $list['priority'], $list['position']);
             $this->addList($l);
         }
+    }
+
+    public function countLists($board) {
+        $req = "SELECT COUNT(list_id) FROM `list` WHERE board_id=:board_id;";
+
+        $statement = $this->getDB()->prepare($req);
+        $statement->bindValue(':board_id', $board->getId(), PDO::PARAM_INT);
+        
+        $statement->execute();
+        $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+        $statement->closeCursor();
+
+        return $result[0]['COUNT(list_id)'];
     }
 
     public function deleteList(CheckList $list) {

@@ -24,6 +24,19 @@ class TaskManager extends Manager {
         }
     }
 
+    public function countTasks($board) {
+        $req = "SELECT COUNT(task_id) FROM `task` WHERE board_id=:board_id;";
+
+        $statement = $this->getDB()->prepare($req);
+        $statement->bindValue(':board_id', $board->getId(), PDO::PARAM_INT);
+        
+        $statement->execute();
+        $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+        $statement->closeCursor();
+
+        return $result[0]['COUNT(task_id)'];
+    }
+
     public function deleteTask(Task $task) {
         $req = "DELETE FROM task WHERE task_id = :id";
 

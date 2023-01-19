@@ -27,11 +27,40 @@ class BoardController {
         }
     }
 
+    public function countLists($userId, $board) {
+        if ($userId == $_SESSION['user_id']) {
+            return $this->ListManager->countLists($board);
+        }
+    }
+
+    public function countTasks($userId, $board) {
+        if ($userId == $_SESSION['user_id']) {
+            return $this->TaskManager->countTasks($board);
+        }
+    }
+    
     public function createBoard() {
         if ($_POST['board'] != null) {
             $this->BoardManager->insertBoard($_SESSION['user_id'], htmlspecialchars($_POST['board']));
             header('Location:'.URL.'board/1/1');
         }
+    }
+
+    public function editBoard($board_id) {
+        $board = $this->BoardManager->getBoardById($board_id);
+        require_once 'view/edit.board.php';
+    }
+
+    public function editBoardValidation() {
+        if ($_POST['name'] != null && $_POST['board-id'] != null) {
+            $this->BoardManager->editBoard($_POST['board-id'], $_POST['name']);
+            header('Location:'.URL.'board/'.$_SESSION['user_id'].'/'.$_POST['board-id']);
+        }
+    }
+
+    public function deleteBoard($board_id) {
+        $this->BoardManager->deleteBoard($board_id);
+        header('Location:'.URL);
     }
 
     public function getTasks($list) {
