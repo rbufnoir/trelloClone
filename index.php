@@ -18,24 +18,24 @@ if (isset($_GET['type'])) {
 
     switch ($_GET['type']) {
         case 'addList':
-            $boardController->addList($_SESSION['user_id'], $_GET['board'], $_GET['data']);
+            $boardController->addList($_SESSION['user_id'], htmlspecialchars($_GET['board']), htmlspecialchars($_GET['data']));
             echo $boardController->getLastInsertedId();
             break;
         case 'addCard':
-            $boardController->addTask($_SESSION['user_id'], $_GET['board'], $_GET['list'], $_GET['data']);
+            $boardController->addTask($_SESSION['user_id'], htmlspecialchars($_GET['board']), htmlspecialchars($_GET['list']), htmlspecialchars($_GET['data']));
             echo $boardController->getLastInsertedId();
             break;
         case 'task':
             if ($_GET['data'] === "delete")
                 $boardController->deleteTask($_GET['task']);
             else
-                $boardController->updateTask($_GET['task'], $_GET['data']);
+                $boardController->updateTask($_GET['task'], htmlspecialchars($_GET['data']));
             break;
         case 'updateList':
             if ($_GET['data'] === "delete")
                 $boardController->deleteList($_GET['list']);
             else
-                $boardController->updateList($_GET['list'], $_GET['data']);
+                $boardController->updateList($_GET['list'], htmlspecialchars($_GET['data']));
     }
 
     return;

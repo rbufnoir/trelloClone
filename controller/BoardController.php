@@ -42,7 +42,7 @@ class BoardController {
     public function createBoard() {
         if ($_POST['board'] != null) {
             $this->BoardManager->insertBoard($_SESSION['user_id'], htmlspecialchars($_POST['board']));
-            header('Location:'.URL.'board/1/1');
+            header('Location:'.URL);
         }
     }
 
@@ -53,7 +53,7 @@ class BoardController {
 
     public function editBoardValidation() {
         if ($_POST['name'] != null && $_POST['board-id'] != null) {
-            $this->BoardManager->editBoard($_POST['board-id'], $_POST['name']);
+            $this->BoardManager->editBoard(htmlspecialchars($_POST['board-id']), htmlspecialchars($_POST['name']));
             header('Location:'.URL.'board/'.$_SESSION['user_id'].'/'.$_POST['board-id']);
         }
     }
