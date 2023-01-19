@@ -9,7 +9,7 @@ $('.list-group').sortable({
             let listId = ($(this).parent().parent().attr('id').split('_')[1]);
             let pos = ($(this).index());
 
-            $.get(`<?= URL ?>index.php?task=${taskId}&list=${listId}&pos=${pos}`, function(data){
+            $.get(`../../index.php?task=${taskId}&list=${listId}&pos=${pos}`, function(data){
                 data;
             });
         });
@@ -23,7 +23,7 @@ $('#lists').sortable({
         let listId = (ui.item.attr('id').split('_')[1]);
         let pos = (ui.item.index());
 
-        $.get(`<?= URL ?>index.php?list=${listId}&pos=${pos}`, function(data){
+        $.get(`../../index.php?list=${listId}&pos=${pos}`, function(data){
                 data;
             });
     }
