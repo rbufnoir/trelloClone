@@ -21,7 +21,7 @@ class UserController
             $email = htmlspecialchars($_POST['yourEmail']);
             $password = password_hash(htmlspecialchars($_POST['yourPassword']), PASSWORD_DEFAULT);
 
-            if ($this->UserManager->isUserMailAlredyTaken($email))
+            if ($this->UserManager->isUserMailAlreadyTaken($email))
                 echo "Mail déjà utilisé";
             else {
                 if ($this->UserManager->newUserDB($username, $email, $password))
@@ -53,7 +53,7 @@ class UserController
         if (isset($_FILES['uploadProfilePicture']) && $_FILES['uploadProfilePicture']['name'] != null)
             $this->UserManager->uploadPicture($_FILES['uploadProfilePicture']);
         
-        if ($this->UserManager->isUserMailAlredyTaken($email) && $email != $_SESSION['email'])
+        if ($this->UserManager->isUserMailAlreadyTaken($email) && $email != $_SESSION['email'])
             echo 'Mail déjà utilisé!';
         else {
             if ($this->UserManager->updateUserInfoDB($username, $email, $user->getId()))

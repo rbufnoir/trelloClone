@@ -49,7 +49,7 @@ class UserManager extends Manager {
         return $result;
     }
 
-    public function isUserMailAlredyTaken($email) {
+    public function isUserMailAlreadyTaken($email) {
         $req = $this->returnQuery("SELECT * FROM user WHERE email='$email';");
         return !empty($req);
     }
